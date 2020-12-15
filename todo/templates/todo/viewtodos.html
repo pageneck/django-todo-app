@@ -1,0 +1,40 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto mt-5">
+        <form method="POST" action="" class="d-inline">
+        
+          {{ form|crispy}}
+          {% csrf_token %} 
+          <button class="btn btn-success"  type="submit">
+            Save
+          </button>
+        </form>
+      
+        <!--  complete a todo -->
+        <form method="POST" action="{% url 'completedtodo' todo.id %}" class="d-inline">
+      
+          {% csrf_token %} 
+          <button class="btn btn-warning margin-right" type="submit">
+            Complete
+          </button>
+        </form>
+      
+        <!-- delete a todo -->
+        <form method="POST" action="{% url 'deletetodo' todo.id %}" class="d-inline">
+      
+          {% csrf_token %} 
+          <button class="btn btn-danger " type="submit">
+            Delete
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

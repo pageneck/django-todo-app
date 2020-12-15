@@ -1,0 +1,68 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+  <div class="div">
+    <div class="row">
+      <div class="col-md-6 mx-auto mt-5">
+        <h4 class="mb-3 pl-3 h-lg">
+          Current Todos
+        </h4>
+        {% if todos %}
+        <div class="card">
+          {% for todo in todos %}
+              <ul class="list-group list-group-flush">
+              {% if todo.important %}
+                <li class="list-group-item bg-completed">
+                  <a class="card-link todo-link" href="{% url 'viewtodo' todo.id %}">
+                      <!--  if there is an important tag -->
+                        <h4 class="card-title"> 
+                          {{ todo.title }}
+                        </h4>
+                        
+                  </a>
+                   <!-- if there is a memo -->
+                
+                  {% if todo.memo %}
+                
+                   -- {{ todo.memo }}
+             
+                  {% endif %}
+        
+                </li>
+              {% else %}
+                <li class="list-group-item ">
+                  <a class="card-link todo-link" href="{% url 'viewtodo' todo.id %}">
+                    <h4 class="card-title"> 
+                       {{ todo.title }}
+                    </h4>
+                  </a>
+                     <!-- if there is a memo -->
+                
+                    {% if todo.memo %}
+                  
+                    -- {{ todo.memo }}
+            
+                    {% endif %}
+                  </li>
+              {% endif %}
+              </ul>
+            {% endfor %}
+          
+
+          {% else %}
+            <div class="container margin-large">
+              <div class="row ">
+                <div class="col-md-6 mx-auto">
+                  <p class="info-text">
+                    It seems like you dont have any todos.. Create one to get started.
+                  </p>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+     {% endblock content %}
+
+      </div>
+    </div>
+  </div>
+
